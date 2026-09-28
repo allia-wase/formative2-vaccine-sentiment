@@ -1,0 +1,9 @@
+ndas
+numpy
+scikit-learn
+matplotlib
+seaborn
+nltk
+wordcloud
+emoji
+jupyter
