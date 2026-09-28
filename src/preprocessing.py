@@ -43,9 +43,28 @@ def clean_text(text: str, demojize: bool = True) -> str:
     return WS_RE.sub(" ", text).strip()
 
 
+def load_raw(raw_path=RAW_PATH):
+    """Read Train.csv and repair the one tweet that a stray newline splits over two lines.
+
+    Row RQMQ0L2A holds only '#lawandorderSVU' with no label; the next line holds the rest of the
+    tweet in tweet_id and the shifted values (text='1', label=0.667). Merge them back into one row.
+    """
+    df = pd.read_csv(raw_path)
+    broken = df.index[df["label"].isna() & df["agreement"].isna()]
+    for i in broken:
+        nxt = df.loc[i + 1] if i + 1 in df.index else None
+        if nxt is not None and pd.isna(nxt["agreement"]) and str(nxt["safe_text"]).strip() in {"-1", "0", "1"}:
+            df.loc[i, "safe_text"] = f"{df.loc[i, 'safe_text'].strip()} {nxt['tweet_id']}"
+            df.loc[i, "label"] = float(nxt["safe_text"])
+            df.loc[i, "agreement"] = nxt["label"]
+            df = df.drop(index=i + 1)
+            print(f"Repaired tweet {df.loc[i, 'tweet_id']} split over two lines")
+    return df.reset_index(drop=True)
+
+
 def make_splits(raw_path=RAW_PATH, out_dir=OUT_DIR, seed=SEED):
     """Clean, deduplicate and create the fixed stratified 70/15/15 train/val/test split."""
-    df = pd.read_csv(raw_path)
+    df = load_raw(raw_path)
     n0 = len(df)
     df = df.dropna(subset=["safe_text", "label", "agreement"])
     df = df[df["label"].isin(VALID_LABELS)].copy()
