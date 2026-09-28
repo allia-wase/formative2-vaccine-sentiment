@@ -1,4 +1,4 @@
-/raw/
+data/raw/
 .venv/
 __pycache__/
 .ipynb_checkpoints/
@@ -6,3 +6,4 @@ __pycache__/
 *.pt
 *.h5
 *.keras
+data/processed/ft_train.txt
