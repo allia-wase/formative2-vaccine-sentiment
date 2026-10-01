@@ -7,3 +7,5 @@ wordcloud
 emoji
 fasttext-wheel
 jupyter
+torch
+tokenizers

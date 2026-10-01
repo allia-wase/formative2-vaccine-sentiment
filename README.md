@@ -15,8 +15,11 @@ Dataset: [To Vaccinate or Not to Vaccinate (Zindi)](https://zindi.world/competit
 ```
 data/raw/          Train.csv, Test.csv (not committed)
 data/processed/    shared train/val/test split (committed)
+data/embeddings/   GloVe-Twitter download + small vector caches (not committed; created by notebook 03)
 src/               preprocessing.py, evaluation.py (shared by everyone)
-notebooks/         01_eda.ipynb, 02_baselines.ipynb, ...
+                   nn_utils.py, models.py, experiments.py (neural models 3 and 4)
+notebooks/         01_eda, 02_baselines, 03_bilstm_glove, 04_transformer_scratch, 05_neural_comparison
+models/            saved model weights (not committed)
 reports/           figures/, predictions/, results.csv, experiment_log.csv
 ```
 
@@ -29,8 +32,12 @@ reports/           figures/, predictions/, results.csv, experiment_log.csv
 - **Baseline 2:** fastText (experiments F1–F2) (`notebooks/02_baselines.ipynb`).
 - **Report:** dataset and EDA section, data preparation, evaluation metrics, and methodology and results for both baselines.
 
-### Person 2 – _Name_: Literature + Models 3 & 4
-- _To be filled in: literature review, BiLSTM + GloVe-Twitter, Transformer encoder from scratch, experiments, notebooks and report sections._
+### Person 2 – Tresor Shingiro: Literature + Models 3 & 4
+- **Shared neural code** (`src/nn_utils.py`, `src/models.py`, `src/experiments.py`): tokenisation (splits `!`/`?`, maps words to GloVe-Twitter spellings such as "don't" → "dont"), GloVe download and caching, training loop with early stopping on validation macro-F1, a seeded experiment runner (3 seeds per config, every run logged), and negation / agreement slice analysis.
+- **Model 3: BiLSTM + GloVe-Twitter** (`notebooks/03_bilstm_glove.ipynb`, experiments L1–L5): embeddings (random / frozen / fine-tuned), direction and pooling (LSTM vs BiLSTM; last / max / attention), class weighting, capacity and dropout, GloVe dimension.
+- **Model 4: Transformer encoder from scratch** (`notebooks/04_transformer_scratch.ipynb`, experiments T1–T5): positional encoding (none / sinusoidal / learned, which tests whether word order matters), model size, word vs BPE subword tokens, GloVe initialisation, pooling and warm-up.
+- **Comparison** (`notebooks/05_neural_comparison.ipynb`): test results, slices and seed stability for all models.
+- **Report:** related work, and the methodology and results for Models 3 and 4.
 
 ### Person 3 – _Name_: Model 5 + Error Analysis + Final Comparison
 - _To be filled in: fine-tuned BERTweet / COVID-Twitter-BERT, error analysis, VADER side experiment, final tables and figures, notebooks and report sections._
@@ -46,6 +53,9 @@ reports/           figures/, predictions/, results.csv, experiment_log.csv
 1. Upload this whole folder to Google Drive at `MyDrive/formative2-vaccine-sentiment/`.
 2. Put `Train.csv` and `Test.csv` in `data/raw/`.
 3. Open `notebooks/01_eda.ipynb`, then `02_baselines.ipynb`, and run all cells (the first cell mounts Drive).
+4. For the neural models set Runtime -> Change runtime type -> **T4 GPU**, then run `03_bilstm_glove.ipynb`,
+   `04_transformer_scratch.ipynb` and `05_neural_comparison.ipynb` in that order (about 15 min each on a T4;
+   notebook 03 downloads GloVe-Twitter once, about 1.5 GB). They also run on a CPU, in about 2 h each.
 
 ## Run (local)
 ```
