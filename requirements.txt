@@ -10,3 +10,4 @@ jupyter
 torch
 tokenizers
 transformers
+vaderSentiment
