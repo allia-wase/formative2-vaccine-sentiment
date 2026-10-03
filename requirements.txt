@@ -9,3 +9,6 @@ fasttext-wheel
 jupyter
 torch
 tokenizers
+transformers
+vaderSentiment
+scipy

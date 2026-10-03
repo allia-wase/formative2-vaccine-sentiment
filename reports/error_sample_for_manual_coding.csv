@@ -1,0 +1,31 @@
+tweet_id,text,y_true,agreement,tfidf_logreg,fasttext,bilstm_glove,transformer_scratch,bertweet,manual_category,notes
+TUD7N3UD,"Who cares if I didn't vaccinate my daughter? It's not your problem it's not your child, it's MY child and my belief.",-1,1.0,1,1,1,1,0,other,Parental rights claim without clear cue
+XLX3D9RE,<user> What's wrong with getting measles?  I had it as a child! That baby is fine! #rights #choice  #vaccineexemption must stay!,-1,1.0,1,0,1,1,1,sarcasm,Rhetorical what's-wrong-with-measles challenge
+RE4YLV4S,AM-News : Many Americans believe widely discredited health conspiracy theories: Is there a link between vaccines... <url>,-1,0.3333333333333333,1,1,1,1,0,news_style,AM-News headline with URL token
+CT28MA7K,"“<user> “<user> Sen. Rand Paul supports ""voluntary"" vaccinations: <url> <url> Measles, much?",-1,0.6666666666666666,1,1,1,1,1,sarcasm,Measles much jab after Rand Paul
+4AUJUYP8,"As anti-vaccine communities grow, measles and whooping cough make a comeback <url>",-1,0.3333333333333333,1,1,1,1,1,news_style,News headline on disease comeback
+1KAVNQ0L,"Says the guy who quarantined the nurse. RT <user> Gov Christie: parents need ""measure of choice"" in vaccinating kids <url>",-1,0.3333333333333333,1,1,1,1,1,sarcasm,Says-the-guy jab at Christie quote
+4QYN15Z1,<user> <user> <user> lol nigga we can't get measles,-1,0.3333333333333333,0,0,0,0,0,other,Dismissive tweet; no clear sarcasm cue
+TDATG11W,#avma 2016 Meriel is out to stop the Lurking Dead.  Rabies Kills Vaccinate @ Henry B. Gonzalez… <url>,0,0.6666666666666666,1,1,1,1,1,other,Event promo about rabies vaccination
+TE40NOVB,<user> <user> I'm a proponent of identifying those at risk not  blindly mandating vaccing everyone regardless of risk,0,0.6666666666666666,1,1,-1,-1,1,ambiguous_label,Risk-based view hard to call neutral
+UO655GKW,"<user> <user> <user> #Mom genes don't cause ASD, toxic ingredients in #vaccines cause #ASD <url>",0,0.6666666666666666,-1,-1,1,-1,1,ambiguous_label,Clear anti-vax ASD claim labeled zero
+X8KV468O,"Walgreens sign: ""College vaccination shots available!"" Huh. I wonder which schools it works against.",0,1.0,1,1,1,1,1,sarcasm,Joke that shots work against schools
+9IRL6EKB,"Why are you All blaming American women for not vaccinating their children thus outbreaks,look at the real truth <url>",0,1.0,-1,1,1,1,1,ambiguous_label,Blame-and-truth framing unclear as zero
+1DDIC02P,"I really think I'm about to cry after getting a shot, stupid health care program vaccines 😭😭",0,0.6666666666666666,1,1,1,1,-1,other,Personal fear after getting a shot
+ZFYH4INN,Wow gotta get vaccines at the doctors after school today smh,0,0.6666666666666666,1,1,1,1,1,other,Casual complaint about doctor's vaccines
+1WBQGP7K,RT <user> POLL: Do You Vaccinate Your Children? <url>,0,1.0,1,1,1,1,1,other,Bare poll retweet without stance
+7YE0WW6U,"<user> News you might've missed, from <user> No. 5: 400 million children get immunized: <url> #vaccineswork",0,0.6666666666666666,1,1,1,1,1,news_style,News roundup link with vaccineswork tag
+O1LQ72U1,<url> Judge orders 10-year-old girl be vaccinated for measles against mom’s wishes. <url>,0,0.6666666666666666,1,1,1,1,1,news_style,Court news order to vaccinate child
+58ZMK3F6,But for real y'all vaccinate your children,0,0.6666666666666666,1,1,1,1,1,ambiguous_label,Pro-vax imperative labeled as neutral
+5UIMWY4K,"AMERICANS, We make a big issue about a vaccine, we do not take about how the disease got here, do nothing to stop it from reoccurring again.",0,0.6666666666666666,1,1,1,1,1,ambiguous_label,Mixed complaint hard to score neutral
+ZCIAST69,#Vaccinate or Not? Did you regret having your kids vaccinated? Just seeing where everyone is at on this!,0,0.6666666666666666,1,1,1,1,-1,other,Open question seeking others' views
+D2303W2I,"Glow-with-the-show ears are the best part of Fantasmic. I don't care if you vaccinate your kids, but for the good of society, buy the ears.",0,1.0,1,1,1,1,1,other,Joke aside; vaccination not the point
+MP2Y59CH,"<user> So what if the kid won't ""get autism from the vaccination."" He'll still have mental issues with her genetics.",0,0.6666666666666666,1,1,1,-1,1,other,Genetics digression not mainly stance
+GIGS057L,<user> <user> there was no such thing as a chicken pox vaccine when we were kids! I had it like a man! (Or a 5 year old boy),0,0.6666666666666666,1,1,1,-1,-1,negation,No such thing as childhood vaccine then
+XVLTN7AQ,<user> Why do African children need vaccinations and our American kids don't?,1,1.0,-1,-1,-1,-1,-1,ambiguous_label,Rhetorical comparison readable two ways
+UFQTUBZA,Well your dead you got measles and I didn't treat it somewhere on the Oregon trail your Laying dead  <user>,1,0.6666666666666666,0,0,0,0,0,sarcasm,Oregon Trail measles death joke
+6U71PDIU,<user> Agree w/ immunizing.Work in hospital &amp; see first hand. Want kids 2 build natural immunity? Let them play in dirt &amp; eat a bug.,1,1.0,0,0,0,0,-1,other,Clear pro-immunizing hospital experience
+A8PJQ3NS,<user> die from measles then,1,0.6666666666666666,0,0,0,0,0,sarcasm,Curt die-from-measles retort
+XVNLDSPO,"For the record, I don't think LC has the measles. I was commenting on the silliness of internet diagnosis.",1,0.6666666666666666,0,0,0,0,0,negation,Don't think LC has measles clarification
+3BYSVISE,Measles Outbreak Highlights Vaccine Debate <url>,1,0.6666666666666666,0,0,0,0,0,news_style,Outbreak debate headline with URL
+JMNLR8RA,Measles Outbreak Traced Back To A Single Unvaccinated Child | <url>,1,0.6666666666666666,0,0,0,0,0,news_style,Outbreak traced headline with URL
