@@ -259,17 +259,16 @@ On the shared test set of 1434 tweets, BERTweet reaches macro-F1 0.7368 and RMSE
 
 ## References
 
-Works named in the README and notebooks (bibliographic details incomplete in the repo):
-
-1. Joulin et al. (2017). Bag of Tricks for Efficient Text Classification (fastText). Cited in notebook 02.
-2. Hochreiter and Schmidhuber (1997); Schuster and Paliwal (1997). LSTM / bidirectional RNN. Cited in notebook 03.
-3. Pennington et al. (2014). GloVe: Global Vectors for Word Representation (GloVe-Twitter). Cited in notebook 03.
-4. Vaswani et al. (2017). Attention Is All You Need. Cited in notebook 04.
-5. Xiong et al. (2020). Pre-LayerNorm Transformer variant. Cited in notebook 04.
-6. Sennrich et al. (2016). Neural Machine Translation of Rare Words with Subword Units (BPE). Cited in notebook 04.
-7. BERTweet / `vinai/bertweet-base` (Nguyen et al., VinAI). Used in notebook 06 and `src/bert_utils.py`.
-8. Hutto and Gilbert (2014). VADER. Cited in notebook 07.
-9. Zindi. To Vaccinate or Not to Vaccinate competition dataset. Linked from README.md.
+1. Joulin, A., Grave, E., Bojanowski, P., & Mikolov, T. (2017). Bag of Tricks for Efficient Text Classification. Proceedings of EACL 2017 (Short Papers), pp. 427–431.
+2. Hochreiter, S., & Schmidhuber, J. (1997). Long Short-Term Memory. Neural Computation, 9(8), 1735–1780.
+3. Schuster, M., & Paliwal, K. K. (1997). Bidirectional recurrent neural networks. IEEE Transactions on Signal Processing, 45(11), 2673–2681.
+4. Pennington, J., Socher, R., & Manning, C. D. (2014). GloVe: Global Vectors for Word Representation. Proceedings of EMNLP 2014, pp. 1532–1543.
+5. Vaswani, A., et al. (2017). Attention Is All You Need. Advances in Neural Information Processing Systems 30.
+6. Xiong, R., et al. (2020). On Layer Normalization in the Transformer Architecture. Proceedings of ICML 2020, PMLR 119, 10524–10533.
+7. Sennrich, R., Haddow, B., & Birch, A. (2016). Neural Machine Translation of Rare Words with Subword Units. Proceedings of ACL 2016, pp. 1715–1725.
+8. Nguyen, D. Q., Vu, T., & Nguyen, A. T. (2020). BERTweet: A pre-trained language model for English Tweets. Proceedings of EMNLP 2020: System Demonstrations, pp. 9–14.
+9. Hutto, C. J., & Gilbert, E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Proceedings of ICWSM-14, 216–225.
+10. Zindi. To Vaccinate or Not to Vaccinate competition dataset. Linked from README.md.
 
 ## Appendix: Numbers used
 
