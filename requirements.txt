@@ -11,3 +11,4 @@ torch
 tokenizers
 transformers
 vaderSentiment
+scipy
