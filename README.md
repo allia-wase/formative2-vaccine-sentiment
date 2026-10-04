@@ -58,9 +58,9 @@ data/embeddings/   GloVe-Twitter download + small vector caches (not committed; 
 src/               preprocessing.py, evaluation.py (shared)
                    nn_utils.py, models.py, experiments.py (neural models 3 and 4)
                    bert_utils.py, analysis.py (Model 5, error analysis, comparison helpers)
-notebooks/         01_eda … 09_final_comparison
+notebooks/         01_eda … 10_models34_followup
 models/            saved model weights (not committed)
-reports/           figures/, predictions/, results.csv, experiment_log.csv, report.md
+reports/           figures/, predictions/, probabilities/, results.csv, experiment_log.csv, report.md
 ```
 
 ## Team and contributions
@@ -77,6 +77,7 @@ reports/           figures/, predictions/, results.csv, experiment_log.csv, repo
 - **Model 3: BiLSTM + GloVe-Twitter** (`notebooks/03_bilstm_glove.ipynb`, experiments L1–L5): embeddings (random / frozen / fine-tuned), direction and pooling (LSTM vs BiLSTM; last / max / attention), class weighting, capacity and dropout, GloVe dimension.
 - **Model 4: Transformer encoder from scratch** (`notebooks/04_transformer_scratch.ipynb`, experiments T1–T5): positional encoding (none / sinusoidal / learned, which tests whether word order matters), model size, word vs BPE subword tokens, GloVe initialisation, pooling and warm-up.
 - **Comparison** (`notebooks/05_neural_comparison.ipynb`): test results, slices and seed stability for all models.
+- **Follow-up checks** (`notebooks/10_models34_followup.ipynb`): T6 (positional encoding re-tested on the final Transformer config), word-shuffle test, test scores over 3 training seeds, ROC/PR curves and a validation-tuned negative-class offset for the BiLSTM.
 - **Report:** related work, and the methodology and results for Models 3 and 4.
 
 ### Person 3 – Keaane: Model 5, error analysis, VADER, final comparison
@@ -113,6 +114,7 @@ Suggested order:
 7. `07_vader.ipynb`
 8. `08_error_analysis.ipynb` (uses saved predictions only)
 9. `09_final_comparison.ipynb` (uses saved predictions and figures only)
+10. `10_models34_followup.ipynb` (Models 3 and 4: positional encoding on the final Transformer config, word-shuffle test, test scores over 3 seeds, ROC/PR curves, negative-class offset; does not change `results.csv` or the prediction files)
 
 ### Colab (T4 GPU for neural models)
 1. Upload this whole folder to Google Drive at `MyDrive/formative2-vaccine-sentiment/`.
@@ -128,8 +130,8 @@ Confusion matrices and learning curves are written by `evaluate()` / `plot_histo
 
 ## Demo video
 
-Link: to be added by the team
+Link: [Demo video (Google Drive)](https://drive.google.com/file/d/16VLErMAq6T_o4ArThgMFHdiHZ2rGLshZ/view?usp=sharing)
 
 ## Team contributions
 
-See the contribution tracker: link to be added by the team
+See the [contribution tracker (Google Sheets)](https://docs.google.com/spreadsheets/d/1Ew4xySneB4duNVBXosSAAYBvDqTKz5iwbxUcJd0eHgM/edit?usp=sharing).
