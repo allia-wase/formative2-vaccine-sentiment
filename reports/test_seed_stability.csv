@@ -1,0 +1,7 @@
+model,seed,macro_f1,rmse,accuracy,f1_negative,recall_negative
+bilstm_glove,42,0.6295,0.5898,0.7336,0.3581,0.2697
+bilstm_glove,1,0.6388,0.5876,0.7329,0.3843,0.3224
+bilstm_glove,2,0.6555,0.5669,0.7392,0.428,0.3618
+transformer_scratch,42,0.6239,0.6693,0.6897,0.4165,0.5329
+transformer_scratch,1,0.6515,0.6468,0.7106,0.4567,0.5724
+transformer_scratch,2,0.6375,0.6496,0.7008,0.4246,0.5461

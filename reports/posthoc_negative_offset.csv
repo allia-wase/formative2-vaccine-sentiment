@@ -1,0 +1,3 @@
+rule,macro_f1,rmse,accuracy,precision_negative,recall_negative,f1_negative,f1_neutral,f1_positive
+official (argmax),0.6295,0.5898,0.7336,0.5325,0.2697,0.3581,0.7912,0.7392
+negative offset +0.45,0.64,0.5871,0.7315,0.4679,0.3355,0.3908,0.7908,0.7384
