@@ -330,3 +330,43 @@ def slice_report(model_names, pred_dir="reports/predictions"):
             rows.append(dict(slice=f"{sl} (n={int(m.sum())})", model=name,
                              macro_f1=f1_score(p["y_true"][m], p["y_pred"][m], average="macro")))
     return pd.DataFrame(rows).pivot(index="slice", columns="model", values="macro_f1")[list(model_names)]
+
+
+class ShuffledDataset(Dataset):
+    """The same tweets with the words of each one in a random order (labels unchanged)."""
+
+    def __init__(self, ds, seed=0):
+        rng = random.Random(seed)
+        self.ids = [rng.sample(s, len(s)) for s in ds.ids]
+        self.y = ds.y
+
+    def __len__(self):
+        return len(self.y)
+
+    def __getitem__(self, i):
+        return self.ids[i], self.y[i]
+
+
+def shuffle_test(model, ds, y_true, n_shuffles=5, masks=None):
+    """Word-order test: macro-F1 on the original tweets vs on n_shuffles copies with shuffled words.
+
+    A model that ignores word order loses nothing; a model that uses it drops. `masks` adds
+    slices ({name: boolean array}) that are scored separately. Returns one row per slice.
+    """
+    import pandas as pd
+    from sklearn.metrics import f1_score
+    y_true = np.asarray(y_true)
+    masks = {"all": np.ones(len(y_true), bool), **(masks or {})}
+
+    def slice_f1(d):
+        yp = predict(model, DataLoader(d, batch_size=256, shuffle=False, collate_fn=collate))[0]
+        return {k: f1_score(y_true[m], yp[m], average="macro") for k, m in masks.items()}
+
+    orig = slice_f1(ds)
+    shuffled = [slice_f1(ShuffledDataset(ds, seed=s)) for s in range(n_shuffles)]
+    rows = []
+    for k, m in masks.items():
+        v = np.array([s[k] for s in shuffled])
+        rows.append(dict(slice=k, n=int(m.sum()), original=orig[k], shuffled=v.mean(),
+                         shuffled_std=v.std(), drop=orig[k] - v.mean()))
+    return pd.DataFrame(rows)

@@ -94,6 +94,73 @@ def save_predictions(model_name, tweet_ids, texts, y_true, y_pred, agreement=Non
     }).to_csv(f"{out_dir}/{model_name}.csv", index=False)
 
 
+def save_probabilities(model_name, tweet_ids, y_true, probs, out_dir="reports/probabilities"):
+    """Class probabilities per tweet (columns: tweet_id, y_true, p_negative, p_neutral, p_positive)."""
+    os.makedirs(out_dir, exist_ok=True)
+    df = pd.DataFrame({"tweet_id": list(tweet_ids), "y_true": list(y_true)})
+    for j, name in enumerate(LABEL_NAMES):
+        df[f"p_{name}"] = np.asarray(probs)[:, j]
+    df.to_csv(f"{out_dir}/{model_name}.csv", index=False)
+
+
+def plot_roc_pr(y_true, probs, model_name, fig_dir="reports/figures", show=True):
+    """One-vs-rest ROC and precision-recall curves for each class.
+
+    Returns {class: (ROC AUC, average precision)}. The dashed line on the PR plot is the
+    class's share of the data, i.e. the precision of a random classifier.
+    """
+    from sklearn.metrics import (average_precision_score, precision_recall_curve,
+                                 roc_auc_score, roc_curve)
+    y_true, probs = np.asarray(y_true), np.asarray(probs)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    out = {}
+    for j, (lab, name) in enumerate(zip(LABELS, LABEL_NAMES)):
+        pos = (y_true == lab).astype(int)
+        auc, ap = roc_auc_score(pos, probs[:, j]), average_precision_score(pos, probs[:, j])
+        fpr, tpr, _ = roc_curve(pos, probs[:, j])
+        prec, rec, _ = precision_recall_curve(pos, probs[:, j])
+        line, = axes[0].plot(fpr, tpr, label=f"{name} (AUC {auc:.3f})")
+        axes[1].plot(rec, prec, color=line.get_color(), label=f"{name} (AP {ap:.3f})")
+        axes[1].axhline(pos.mean(), color=line.get_color(), ls="--", lw=0.8)
+        out[name] = (auc, ap)
+    axes[0].plot([0, 1], [0, 1], "k--", lw=0.8)
+    axes[0].set(xlabel="False positive rate", ylabel="True positive rate", title=f"{model_name}: ROC (one-vs-rest)")
+    axes[1].set(xlabel="Recall", ylabel="Precision", title=f"{model_name}: precision-recall")
+    for ax in axes:
+        ax.legend(fontsize=8)
+    plt.tight_layout()
+    plt.savefig(f"{fig_dir}/roc_pr_{model_name}.png", dpi=200)
+    if show:
+        plt.show()
+    plt.close()
+    return out
+
+
+def apply_class_offset(probs, offset, cls=-1):
+    """Add `offset` to one class's log-probability and renormalise.
+
+    Returns (y_pred, y_score, probs) in the same form as nn_utils.predict().
+    """
+    logp = np.log(np.clip(np.asarray(probs, dtype=float), 1e-12, 1.0))
+    logp[:, LABELS.index(cls)] += offset
+    P = np.exp(logp - logp.max(1, keepdims=True))
+    P /= P.sum(1, keepdims=True)
+    classes = np.array(LABELS)
+    return classes[P.argmax(1)], P @ classes, P
+
+
+def tune_class_offset(probs, y_true, cls=-1, grid=np.round(np.arange(-1.0, 3.01, 0.05), 2)):
+    """Offset for one class that maximises macro-F1. Tune on validation only.
+
+    Ties go to the offset closest to 0. Returns (best offset, table of offset vs macro-F1).
+    """
+    table = pd.DataFrame({"offset": grid, "macro_f1": [
+        f1_score(y_true, apply_class_offset(probs, b, cls)[0], average="macro") for b in grid]})
+    best = table.assign(dist=table["offset"].abs()).sort_values(["macro_f1", "dist"],
+                                                                ascending=[False, True]).iloc[0]
+    return float(best["offset"]), table
+
+
 def log_run(model_name, params, val_macro_f1, val_rmse, author="", notes="",
             log_path="reports/experiment_log.csv"):
     """Append one row per training run to the shared experiment log."""
